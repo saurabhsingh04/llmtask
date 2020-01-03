@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost/api"
+            "url": "http://localhost"
         }
     ],
     "paths": {

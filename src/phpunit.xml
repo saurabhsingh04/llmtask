@@ -21,9 +21,12 @@
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./app/Http/Controller/Api</directory>
+            <directory suffix=".php">./app/Http</directory>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-html" target="./report" />
+    </logging>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>

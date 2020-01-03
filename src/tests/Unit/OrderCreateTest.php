@@ -9,7 +9,7 @@ use Mockery;
 
 class OrderCreateTest extends TestCase
 {
-    protected $endpoint = '/api/orders';
+    protected $endpoint = '/orders';
     protected $origin = ["28.704060", "77.102493"];
     protected $dest = ["28.459497", "77.026634"];
     /**

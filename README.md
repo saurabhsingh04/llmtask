@@ -8,7 +8,7 @@ Please check the official laravel installation guide for server requirements bef
 
 Clone the repository
 
-    git clone llmtask.git
+    git clone https://github.com/saurabhsingh04/llmtask.git
 
 Switch to the repo folder
 
@@ -34,7 +34,7 @@ You can now access the server at http://localhost:8000
 
 **command list**
 
-    git clone llmtask.git
+    git clone https://github.com/saurabhsingh04/llmtask.git
     cd llmtask/src
     composer install
     cp .env.example .env

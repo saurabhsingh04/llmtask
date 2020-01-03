@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Http\Model\Order;
+use DB;
 /**
  * Orders repository
  */
@@ -64,6 +65,9 @@ class OrderRepository
    */
   public function updateOrder(Order $order, array $data)
   {
-    return $order->update($data);
+    DB::beginTransaction();
+    $order->update($data);
+    DB::commit();
+    return $order;
   }
 }

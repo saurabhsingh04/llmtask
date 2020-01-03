@@ -7,7 +7,7 @@ use Artisan;
 
 class OrderListTest extends TestCase
 {
-    protected $endpoint = '/api/orders';
+    protected $endpoint = '/orders';
     protected $respStructure = [
         'distance',
         'id',

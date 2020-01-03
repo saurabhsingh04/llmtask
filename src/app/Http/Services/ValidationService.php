@@ -53,7 +53,7 @@ class ValidationService
             $request->all(), 
             [
             'origin' => 'required|array|between:2,2',
-            'destination' => 'required|array|between:2,2',
+            'destination' => 'required|array|between:2,2|different:origin',
             'origin.0' => ['string','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
             'destination.0' => ['string','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
             'origin.1' => ['string','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],

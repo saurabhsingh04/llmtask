@@ -7,17 +7,17 @@ use App\Http\Model\Order;
 
 class OrderUpdateTest extends TestCase
 {
-    protected $endpoint = '/api/orders';
+    protected $endpoint = '/orders';
 
      /**
      * Without Order id
      *
      * @return void
      */
-    public function testWithoutOrderId405()
+    public function testWithoutOrderId400()
     {
         $response = $this->patch($this->endpoint);
-        $response->assertStatus(405);
+        $response->assertStatus(400);
     }
     /**
      * Without status parameter

@@ -19,4 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('orders', 'OrderController@list');
 Route::post('orders', 'OrderController@create');
-Route::patch('orders/{id}', 'OrderController@update');
+Route::patch('orders/{id?}', 'OrderController@update');
+
+Route::fallback(function (){
+    throw new App\Http\Exceptions\BadRequestException('NOT_FOUND', 400, "No Route Found");
+});
