@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS `llmtask`;
+CREATE DATABASE IF NOT EXISTS `llmtasktest`;
+GRANT ALL ON *.* TO 'root';
