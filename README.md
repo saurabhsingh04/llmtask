@@ -1,4 +1,4 @@
-#<p align="center">LLMTASK</p>
+# <p align="center">LLMTASK</p>
 # Getting started
 
 ## Installation
@@ -113,3 +113,18 @@ Run the laravel development server
 The api can now be accessed at
 
     http://localhost:8000/api
+
+---------
+# Running through docker
+
+Clone the repository
+
+    git clone https://github.com/saurabhsingh04/llmtask.git
+
+Switch to the repo folder
+
+    cd llmtask
+
+Run the
+
+	./start.sh
