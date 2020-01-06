@@ -14,7 +14,7 @@ class GoogleDistanceService implements RoutingInterface
         try {
             $endpoint = config('services.distance.endpoint');
             $key = config('services.distance.key');
-            $url = $endpoint.'?origins=12.dsas,'.$lang1.'&destinations='.$lat2.','.$lang2.'&key='.$key;
+            $url = $endpoint.'?origins='.$lat1.','.$lang1.'&destinations='.$lat2.','.$lang2.'&key='.$key;
             $client = new \GuzzleHttp\Client();
             $response = $client->request('GET', $url);
             $response = json_decode($response->getBody(), true);
