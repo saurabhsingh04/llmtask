@@ -11,7 +11,7 @@ Switch to the repo folder
 
     cd llmtask
 
-**Make sure you set the correct database connection and testing database connection host, username and password information and distance API key in the file src/.env.example**
+**Make sure you set the correct distance API key in the file src/.env**
 
 Run the
 
