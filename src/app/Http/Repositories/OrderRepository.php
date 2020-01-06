@@ -52,24 +52,36 @@ class OrderRepository
    * @param integer $id
    * @return Order
    */
-  public function getForUpdate(int $id)
+  public function getOrder(int $id)
   {
-    return $this->order->lockForUpdate()->find($id);
+    $order = $this->order->find($id);
+    if(!$order)
+    {
+        throw new OrderException("ORDER_NOT_FOUND", 404,'Order id not found');  
+    }
+    return $order;
   }
   /**
    * Update order
    *
-   * @param Order $order
+   * @param integer $id
    * @param array $data
    * 
    * @return Order
    */
-  public function updateOrder(Order $order, array $data)
+  public function updateOrder(int $id, array $data)
   {
     DB::beginTransaction();
     try {
+      $order = $this->getOrder($id);
+      if($order->status=='TAKEN')
+      {
+          throw new OrderException("ALREADY_TAKEN", 409,'Order is already taken.');
+      }
       $order->update($data);
       DB::commit();
+    } catch (OrderException $exec) {
+      throw $exec;
     } catch (\Throwable $th) {
       DB::rollback();
       throw new OrderException("Error Processing Request", 503);

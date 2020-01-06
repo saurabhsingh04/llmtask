@@ -4,11 +4,12 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Http\Model\Order;
+use Mockery;
+use DB;
 
 class OrderUpdateTest extends TestCase
 {
     protected $endpoint = '/orders';
-
      /**
      * Without Order id
      *

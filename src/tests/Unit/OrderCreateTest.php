@@ -190,4 +190,62 @@ class OrderCreateTest extends TestCase
         $response = $this->post($this->endpoint,['origin'=>$this->origin,'destination'=>$dest]);
         $response->assertStatus(400);
     }
+    /**
+     * Origin with float Latitude
+     *
+     * @return void
+     */
+    public function testOriginfloatLatitude400()
+    {
+        $origin = $this->origin;
+        $origin[0] = (float)$origin[0];
+        $response = $this->post($this->endpoint,['origin'=>$origin,'destination'=>$this->dest]);
+        $response->assertStatus(400);
+    }
+     /**
+     * Dest with float Latitude
+     *
+     * @return void
+     */
+    public function testDestfloatLatitude400()
+    {
+        $dest = $this->dest;
+        $dest[0] = (float)$dest[0];
+        $response = $this->post($this->endpoint,['origin'=>$this->origin,'destination'=>$dest]);
+        $response->assertStatus(400);
+    }
+    /**
+     * Origin with float Longitude
+     *
+     * @return void
+     */
+    public function testOriginfloatLongitude400()
+    {
+        $origin = $this->origin;
+        $origin[1] = (float)$origin[1];
+        $response = $this->post($this->endpoint,['origin'=>$origin,'destination'=>$this->dest]);
+        $response->assertStatus(400);
+    }
+     /**
+     * Dest with float Longitude
+     *
+     * @return void
+     */
+    public function testDestfloatLongitude400()
+    {
+        $dest = $this->dest;
+        $dest[1] = (float)$dest[1];
+        $response = $this->post($this->endpoint,['origin'=>$this->origin,'destination'=>$dest]);
+        $response->assertStatus(400);
+    }
+     /**
+     * If origin and dest are same
+     *
+     * @return void
+     */
+    public function testSameOrgDest400()
+    {
+        $response = $this->post($this->endpoint,['origin'=>$this->origin,'destination'=>$this->origin]);
+        $response->assertStatus(400);
+    }
 }

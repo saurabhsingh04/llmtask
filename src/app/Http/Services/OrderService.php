@@ -76,39 +76,6 @@ class OrderService
      */
     public function update(Request $request, array $data)
     {
-        $order = $this->getOrderById($request->id);
-        $this->isTaken($order);
-        return $this->order->updateOrder($order, $data);
-    }
-    /**
-     * Check for already taken
-     *
-     * @param integer $id
-     * @return void
-     * @throws Exception
-     */
-    public function isTaken(Order $order)
-    {
-        if($order->status=='TAKEN')
-        {
-            throw new OrderException("ALREADY_TAKEN", 409,'Order is already taken.');
-        }
-    }
-    /**
-     * get Order by order id
-     *
-     * @param integer $id
-     * @return order
-     * @throws Exception
-     */
-    public function getOrderById(int $id)
-    {
-        $order = $this->order->getForUpdate($id);
-        // sleep(5);
-        if(!$order)
-        {
-            throw new OrderException("ORDER_NOT_FOUND", 404,'Order id not found');
-        }
-        return $order;
+        return $this->order->updateOrder($request->id, $data);
     }
 }
