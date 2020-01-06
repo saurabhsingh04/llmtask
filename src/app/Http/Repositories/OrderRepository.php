@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Http\Model\Order;
 use DB;
+use App\Http\Exceptions\OrderException;
 /**
  * Orders repository
  */
@@ -66,8 +67,13 @@ class OrderRepository
   public function updateOrder(Order $order, array $data)
   {
     DB::beginTransaction();
-    $order->update($data);
-    DB::commit();
+    try {
+      $order->update($data);
+      DB::commit();
+    } catch (\Throwable $th) {
+      DB::rollback();
+      throw new OrderException("Error Processing Request", 503);
+    }
     return $order;
   }
 }

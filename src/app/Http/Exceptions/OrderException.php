@@ -44,9 +44,9 @@ class OrderException extends Exception
      */
     public function render()
     {
-        return response()->json([
+        return response()->json(array_filter([
             "error" => $this->message,
             "details" => $this->details
-        ], $this->code);
+        ]), $this->code);
     }
 }
