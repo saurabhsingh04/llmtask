@@ -3,7 +3,7 @@
 namespace App\Http\Services;
 use App\Http\Exceptions\OrderException;
 use App\Contracts\RoutingInterface;
-
+use Log;
 /**
  * Routing services functions
  */
@@ -14,7 +14,7 @@ class GoogleDistanceService implements RoutingInterface
         try {
             $endpoint = config('services.distance.endpoint');
             $key = config('services.distance.key');
-            $url = $endpoint.'?origins='.$lat1.','.$lang1.'&destinations='.$lat2.','.$lang2.'&key='.$key;
+            $url = $endpoint.'?origins=12.dsas,'.$lang1.'&destinations='.$lat2.','.$lang2.'&key='.$key;
             $client = new \GuzzleHttp\Client();
             $response = $client->request('GET', $url);
             $response = json_decode($response->getBody(), true);
@@ -28,7 +28,9 @@ class GoogleDistanceService implements RoutingInterface
         } catch (OrderException $exc) {
             throw $exc;
         } catch (\Throwable $th) {
-            throw new OrderException('DISTANCE_API_ERROR', $th->getCode(), $th->getMessage());   
+            $code = $th->getCode() ? $th->getCode() : 500;
+            Log::error($th->getMessage());
+            throw new OrderException('DISTANCE_API_ERROR', $code, "Something went wrong");   
         }
     }
 }
