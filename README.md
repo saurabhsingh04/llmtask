@@ -5,7 +5,7 @@
 
 Clone the repository
 
-    git clone https://github.com/saurabhsingh04/llmtask.git
+    git clone https://github.com/saurabhsingh04/llmtask
 
 Switch to the repo folder
 
