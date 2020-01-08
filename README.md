@@ -21,9 +21,14 @@ Switch to the repo folder
 
 **Make sure you set the correct distance API key in the file src/.env by updating the DISTANCE_API_KEY variable value**
 
-For creating container, migrating database, running test cases and generating documentation  run the
+For creating image and start the container.
 
 	./start.sh
+After starting container following will be executed automatically:
+
+- Table migrations using artisan migrate command.
+- Api Documentation
+- Unit and Integration test cases execution.
 
 ## Testing API Manually
 
