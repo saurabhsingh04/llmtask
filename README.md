@@ -1,7 +1,7 @@
 # <p align="center">LLMTASK</p>
 # Getting started
 
-# Running through docker
+## Running through docker
 
 Clone the repository
 
@@ -17,3 +17,12 @@ Run the
 
 	./start.sh
 
+## Testing API
+
+Run unit and integration test
+
+	./vendor/bin/phpunit
+
+## API Documentation
+
+	http://localhost/api/documentation

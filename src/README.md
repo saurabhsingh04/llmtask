@@ -112,4 +112,4 @@ Run the laravel development server
 
 The api can now be accessed at
 
-    http://localhost:8000/api
+    http://localhost:8000
