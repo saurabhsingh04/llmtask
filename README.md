@@ -43,3 +43,88 @@ Run unit and integration test
 ## API Documentation
 
 	http://localhost/documentation
+
+
+## API Reference Documentation
+- `localhost/orders?page=:page&limit=:limit` :
+
+    GET Method - to fetch orders with page number and limit
+    1. Header :
+        - GET /orders?page=1&limit=5 HTTP/1.1
+        - Host: localhost
+        - Content-Type: application/json
+
+    2. Responses :
+
+    ```
+            [
+              {
+                "id": 1,
+                "distance": 2023,
+                "status": "TAKEN"
+              },
+              ...
+            ]
+    ```
+
+        Code                    Description
+        - 200                   successful operation
+        - 400                   Invalid Request Parameter
+
+- `localhost/orders` :
+
+    POST Method - to create new order with origin and distination
+    1. Header :
+        - POST /orders HTTP/1.1
+        - Host: localhost
+        - Content-Type: application/json
+
+    2. Post-Data :
+    ```
+         {
+            "origin" :["27.514501", "77.102493"],
+            "destination" :["27.515517", "77.102513"]
+         }
+    ```
+
+    3. Responses :
+    ```
+            {
+              "id": 7601,
+              "distance": 3000,
+              "status": "UNASSIGNED"
+            }
+    ```
+
+        Code                    Description
+        - 200                   successful operation
+        - 400                   BAD Request
+        - 503                   Google distance service error
+        - 500					Internal error
+
+- `localhost/orders/:id` :
+
+    PATCH method to update status for taken.
+    1. Header :
+        - PATCH /orders/2 HTTP/1.1
+        - Host: localhost
+        - Content-Type: application/json
+    2. Post-Data :
+    ```
+         {
+            "status" : "TAKEN"
+         }
+    ```
+
+    3. Responses :
+    ```
+            {
+              "status": "SUCCESS"
+            }
+    ```
+
+        Code                    Description
+        - 200                   successful operation
+        - 400                   Invalid Request Parameter
+        - 409                   Order already taken
+        - 404                   Order id not found
