@@ -13,7 +13,7 @@ Switch to the repo folder
 
 **Make sure you set the correct distance API key in the file src/.env by updating the DISTANCE_API_KEY variable value**
 
-Run the
+For creating container, running test cases and generating documentation  run the
 
 	./start.sh
 
@@ -21,7 +21,11 @@ Run the
 
 Run unit and integration test
 
-	./vendor/bin/phpunit
+	docker-compose exec app ./vendor/bin/phpunit
+
+## Generate API Documentation
+
+	docker-compose exec app php artisan l5-swagger:generate
 
 ## API Documentation
 
