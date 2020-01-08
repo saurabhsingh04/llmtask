@@ -1,6 +1,14 @@
 # <p align="center">LLMTASK</p>
 # Getting started
 
+## Requirements
+
+- [Docker](https://www.docker.com/) as the container service to isolate the environment.
+- [Php](https://php.net/) to develop backend support.
+- [Laravel](https://laravel.com) as the server framework / controller layer
+- [MySQL](https://mysql.com/) as the database layer
+- [NGINX](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/) as a proxy / content-caching layer
+
 ## Running through docker
 
 Clone the repository
@@ -13,20 +21,20 @@ Switch to the repo folder
 
 **Make sure you set the correct distance API key in the file src/.env by updating the DISTANCE_API_KEY variable value**
 
-For creating container, running test cases and generating documentation  run the
+For creating container, migrating database, running test cases and generating documentation  run the
 
 	./start.sh
 
-## Testing API
+## Testing API Manually
 
 Run unit and integration test
 
 	docker-compose exec app ./vendor/bin/phpunit
 
-## Generate API Documentation
+## Generate API Documentation Manually
 
 	docker-compose exec app php artisan l5-swagger:generate
 
 ## API Documentation
 
-	http://localhost/api/documentation
+	http://localhost/documentation

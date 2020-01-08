@@ -64,7 +64,7 @@ Run the database seeder and you're done
 
 This application adheres to the api documentation
 
-	{{L5_SWAGGER_BASE_PATH}}/api/documentation
+	{{L5_SWAGGER_BASE_PATH}}/documentation
 
 ----------
 

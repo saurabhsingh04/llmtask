@@ -80,6 +80,7 @@
  *           )
  *       ),
  *       @OA\Response(response=400, description="INVALID_REQUEST"),
+ *       @OA\Response(response=503, description="DISTANCE_API_ERROR")
  *     )
  *
  * Returns list of orders
@@ -115,6 +116,7 @@
  *       ),
  *       @OA\Response(response=400, description="INVALID_REQUEST"),
  *       @OA\Response(response=404, description="NOT_FOUND"),
+ *       @OA\Response(response=409, description="ALREADY_TAKEN")
  *     )
  *
  * Returns list of orders
