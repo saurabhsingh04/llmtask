@@ -100,7 +100,6 @@ Run unit and integration test
         - 200                   successful operation
         - 400                   BAD Request
         - 503                   Google distance service error
-        - 500					Internal error
 
 - `localhost/orders/:id` :
 
