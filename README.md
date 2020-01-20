@@ -20,7 +20,8 @@ Switch to the repo folder
     cd llmtask
 
 ## Prerequisite
-	Make sure you set the correct distance API key in the file src/.env by 		updating the DISTANCE_API_KEY variable value
+	Make sure you set the correct distance API key in the file src/.env by
+    updating the DISTANCE_API_KEY variable value
 
 ## Running Application
 For creating image and start the container.
