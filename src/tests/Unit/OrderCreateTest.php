@@ -19,30 +19,44 @@ class OrderCreateTest extends TestCase
      */
     public function testValidInput200()
     {
+        //Mock distance service
         $distservice = Mockery::mock(\App\Contracts\RoutingInterface::class);
         $distservice->shouldReceive('getDistance')
             ->with($this->origin[0], $this->origin[1], $this->dest[0], $this->dest[1])
             ->once()
             ->andReturn(rand(4000,50000));
         $this->app->instance(\App\Contracts\RoutingInterface::class, $distservice);
+        
+        //Mock create method of order repo
+        $orderRepo = Mockery::mock(\App\Http\Repositories\OrderRepository::class);
+        $orderRepo->shouldReceive('create')
+            ->once()
+            ->andReturn(new \App\Http\Model\Order());
+        $this->app->instance(\App\Http\Repositories\OrderRepository::class, $orderRepo);
+
         $response = $this->post($this->endpoint,['origin'=>$this->origin,'destination'=>$this->dest]);
-        $response->assertStatus(200);
+        
+        $response->assertStatus(200)->assertJsonStructure([
+            'distance',
+            'id',
+            'status'
+        ]);
     }
      /**
      * Valid Input but get exception during distance api call
      *
      * @return void
      */
-    public function testValidInputButExceptionDistanceApi503()
+    public function testValidInputButExceptionDistanceApi422()
     {
         $distservice = Mockery::mock(\App\Contracts\RoutingInterface::class);
         $distservice->shouldReceive('getDistance')
             ->with($this->origin[0], $this->origin[1], $this->dest[0], $this->dest[1])
             ->once()
-            ->andThrow(new OrderException('DISTANCE_API_ERROR', 503, 'abc'));
+            ->andThrow(new OrderException('DISTANCE_API_ERROR', 422, 'abc'));
         $this->app->instance(\App\Contracts\RoutingInterface::class, $distservice);
         $response = $this->post($this->endpoint,['origin'=>$this->origin,'destination'=>$this->dest]);
-        $response->assertStatus(503);
+        $response->assertStatus(422);
     }
      /**
      * Without origin and destination parameter

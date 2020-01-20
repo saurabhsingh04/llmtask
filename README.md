@@ -9,7 +9,7 @@
 - [MySQL](https://mysql.com/) as the database layer
 - [NGINX](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/) as a proxy / content-caching layer
 
-## Running through docker
+## Cloning The GitHub Repository
 
 Clone the repository
 
@@ -19,8 +19,10 @@ Switch to the repo folder
 
     cd llmtask
 
-**Make sure you set the correct distance API key in the file src/.env by updating the DISTANCE_API_KEY variable value**
+## Prerequisite
+	Make sure you set the correct distance API key in the file src/.env by 		updating the DISTANCE_API_KEY variable value
 
+## Running Application
 For creating image and start the container.
 
 	./start.sh
@@ -99,7 +101,7 @@ Run unit and integration test
         Code                    Description
         - 200                   successful operation
         - 400                   BAD Request
-        - 503                   Google distance service error
+        - 422                   Google distance service error
 
 - `localhost/orders/:id` :
 

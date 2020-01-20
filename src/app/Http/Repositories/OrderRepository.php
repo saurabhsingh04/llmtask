@@ -54,7 +54,7 @@ class OrderRepository
    */
   public function getOrder(int $id)
   {
-    $order = $this->order->find($id);
+    $order = $this->order->lockForUpdate()->find($id);
     if(!$order)
     {
         throw new OrderException("ORDER_NOT_FOUND", 404,'Order id not found');  
@@ -84,7 +84,7 @@ class OrderRepository
       throw $exec;
     } catch (\Throwable $th) {
       DB::rollback();
-      throw new OrderException("Error Processing Request", 503);
+      throw new OrderException("Error Processing Request", 422);
     }
     return $order;
   }

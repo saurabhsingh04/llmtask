@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Artisan;
+use Mockery;
+use Closure;
 
 class OrderListTest extends TestCase
 {
@@ -13,11 +15,39 @@ class OrderListTest extends TestCase
         'id',
         'status'
     ];
+    protected $mock;
+    protected $repo = 'App\Http\Repositories\OrderRepository';
+    protected $orders;
+
     public function setUp(): void
     {
         parent::setUp();
         Artisan::call('migrate');
         Artisan::call('db:seed', ['--class' => 'OrdersTableSeeder', '--database' => 'testing']);
+        $this->orders = \App\Http\Model\Order::paginate(1);
+    }
+    /**
+     * Clean up the mockery container
+     *
+     * @return void
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        Mockery::close();
+    }
+    /**
+     * Mock the class and bind the mocked instance with app
+     *
+     * @param string $class
+     * @return void
+     */
+    protected function mock($class, Closure $mock = null)
+    {
+        $mockedInstance = parent::mock($class);
+        
+        $this->app->instance($class, $mockedInstance);
+        return $mockedInstance;
     }
     /**
      * get orders without page and limit
@@ -26,6 +56,7 @@ class OrderListTest extends TestCase
      */
     public function testList200()
     {
+        $this->mock($this->repo)->shouldReceive('fetch')->once()->andReturn($this->orders);
         $response = $this->get($this->endpoint);
         $response->assertStatus(200)->assertJsonStructure(['*' => $this->respStructure]);
     }
@@ -36,6 +67,7 @@ class OrderListTest extends TestCase
      */
     public function testListWithPageOnly200()
     {
+        $this->mock($this->repo)->shouldReceive('fetch')->once()->andReturn($this->orders);
         $response = $this->get($this->endpoint."?page=2");
         $response->assertStatus(200)->assertJsonStructure(['*' => $this->respStructure]);
     }
@@ -46,6 +78,7 @@ class OrderListTest extends TestCase
      */
     public function testListWithLimitOnly200()
     {
+        $this->mock($this->repo)->shouldReceive('fetch')->once()->andReturn($this->orders);
         $response = $this->get($this->endpoint."?limit=2");
         $response->assertStatus(200)->assertJsonStructure(['*' => $this->respStructure]);
     }
@@ -56,6 +89,7 @@ class OrderListTest extends TestCase
      */
     public function testListWithPageAndWithLimit200()
     {
+        $this->mock($this->repo)->shouldReceive('fetch')->once()->andReturn($this->orders);
         $response = $this->get($this->endpoint."?page=2&limit=2");
         $response->assertStatus(200)->assertJsonStructure(['*' => $this->respStructure]);
     }
@@ -218,8 +252,8 @@ class OrderListTest extends TestCase
      */
     public function testListWitAccessivePageNumber()
     {
+        $this->mock($this->repo)->shouldReceive('fetch')->once()->andReturn($this->orders);
         $response = $this->get($this->endpoint."?page=500000");
         $response->assertStatus(200)->assertJsonStructure([]);
     }
-
 }

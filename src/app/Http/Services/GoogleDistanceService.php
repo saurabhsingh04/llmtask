@@ -23,7 +23,7 @@ class GoogleDistanceService implements RoutingInterface
                 return $response['rows'][0]['elements'][0]['distance']['value'];
             } else {
                 $msg = is_array($response) && $response['error_message'] ? $response['error_message'] : "Error Processing Request"; 
-                throw new OrderException('DISTANCE_API_ERROR', 503, $msg);
+                throw new OrderException('DISTANCE_API_ERROR', 422, $msg);
             }
         } catch (OrderException $exc) {
             throw $exc;
