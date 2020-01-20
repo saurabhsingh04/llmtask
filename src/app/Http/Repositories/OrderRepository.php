@@ -74,12 +74,12 @@ class OrderRepository
     DB::beginTransaction();
     try {
       $order = $this->getOrder($id);
-      if($order->status=='TAKEN')
+      $affectedRows = Order::where(['id' => $id,'status'=>'UNASSIGNED'])->update(['status' => 'TAKEN']);
+      DB::commit();
+      if(!$affectedRows)
       {
           throw new OrderException("ALREADY_TAKEN", 409,'Order is already taken.');
       }
-      $order->update($data);
-      DB::commit();
     } catch (OrderException $exec) {
       throw $exec;
     } catch (\Throwable $th) {
