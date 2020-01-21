@@ -29,6 +29,7 @@ For creating image and start the container.
 	./start.sh
 After starting container following will be executed automatically:
 
+- Application will run over port 80
 - Table migrations using artisan migrate command.
 - Api Documentation
 - Unit and Integration test cases execution.
